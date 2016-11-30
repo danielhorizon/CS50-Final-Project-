@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        
+    <!-- Latest compiled and minified Bootstrap4 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    
+    <!-- Optional Bootstrap theme -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    
+    <!-- custom css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script> 
+    
+    <!-- Latest compiled and minified Bootstrap4 JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/2d2b7da673.js"></script>
+
+    <!-- http://stewartjpark.com/Flask-JSGlue/ -->
+    {{ JSGlue.include() }}
+    
+    <!-- custom scripts -->
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>   
+    
+        <title>Banter | {% block title %}{% endblock %}</title>
+    
+    </head>
+    <body>
+        
+        <!-- wrapping container -->
+        <div class="container">
+            
+        <!-- Static navbar -->
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Banter</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+        <!-- left hand nav RESERVED
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul> -->
+        <ul class="nav navbar-nav navbar-right">
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                <input type="text" class="form-control" placeholder="Find board">
+                </div>
+                <button type="submit" class="btn btn-default">Go</button>
+            </form>
+            <li><a href="#">Post Banter</a></li>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+            </li>
+        </ul>
+        </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+        </nav>
+            
+        <!-- content container -->
+        <div class="custom-content-container container-fluid">
+            <h3 class="text-center">Live feed of what people are saying on this board</h2>
+            
+            <!-- posts -->
+            
+            <!-- a card -->    
+            <div class="card custom-card">
+            <div class="card-block">
+                <h4 class="card-text">When you take a 10 minutes study break and it accidentally lasts the entire year.</h4>
+                <p class="card-text"><small class="text-muted">3 days ago</small><small> by sarimabbas</small></p>
+            </div>
+            
+            <div class="card-block">
+                <a href="#" class="card-link">Comments</a>
+                
+                <div class="pull-right">               
+                <a class="card-link" href="#"><i class="fa fa-chevron-up"></i></a>
+                <a class="card-link" href="#">1</a>
+                <a class="card-link" href="#"><i class="fa fa-chevron-down"></i></a>
+                </div>
+            </div>
+            
+            <!-- reserved for showing comments
+            <div class="card-footer text-muted">
+            </div> -->
+            
+            <!-- end card -->
+            </div>
+            
+            
+            <!-- a card -->
+            <div class="card custom-card">
+            <div class="card-block">
+                <h4 class="card-text">When I die, I want my group project members to lower me into my grave so they can let me down one last time.</h4>
+                <p class="card-text"><small class="text-muted">4 days ago</small><small> by Anonymous</small></p>
+            </div>
+            
+            <div class="card-block">
+                <a href="#" class="card-link">Comments</a>
+                
+                <div class="pull-right">               
+                <a class="card-link" href="#"><i class="fa fa-chevron-up"></i></a>
+                <a class="card-link" href="#">1</a>
+                <a class="card-link" href="#"><i class="fa fa-chevron-down"></i></a>
+                </div>
+            </div>
+            
+            <!-- reserved for showing comments
+            <div class="card-footer text-muted">
+            </div> -->
+            
+            <!-- end card -->
+            </div>
+            
+            <!-- a card -->
+            <div class="card custom-card">
+            
+            <div class="card-header">
+            <iframe width="100%" height="200" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/295019679&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+            </div>    
+                
+            <div class="card-block">
+                <h4 class="card-text">i luv john oliver</h4>
+                <p class="card-text"><small class="text-muted">4 days ago</small><small> by fatih54</small></p>
+            </div>
+            
+            <div class="card-block">
+                <a href="#" class="card-link">Comments</a>
+                
+                <div class="pull-right">               
+                <a class="card-link" href="#"><i class="fa fa-chevron-up"></i></a>
+                <a class="card-link" href="#">1</a>
+                <a class="card-link" href="#"><i class="fa fa-chevron-down"></i></a>
+                </div>
+            </div>
+            
+            <!-- reserved for showing comments
+            <div class="card-footer text-muted">
+            </div> -->
+            
+            <!-- end card -->
+            </div>
+            
+            <!-- a card -->
+            <div class="card custom-card">
+            
+            <div class="card-header">
+                <iframe width="100%" height="500" src="https://www.youtube.com/embed/34Na4j8AVgA" frameborder="0" allowfullscreen></iframe>
+            </div>    
+                
+            <div class="card-block">
+                <h4 class="card-text">check out the weeknd</h4>
+                <p class="card-text"><small class="text-muted">4 days ago</small><small> by danielgtos</small></p>
+            </div>
+            
+            <div class="card-block">
+                <a href="#" class="card-link">Comments</a>
+                
+                <div class="pull-right">               
+                <a class="card-link" href="#"><i class="fa fa-chevron-up"></i></a>
+                <a class="card-link" href="#">1</a>
+                <a class="card-link" href="#"><i class="fa fa-chevron-down"></i></a>
+                </div>
+            </div>
+            
+            <!-- reserved for showing comments
+            <div class="card-footer text-muted">
+            </div> -->
+            
+            <!-- end card -->
+            </div>
+            
+            <!-- a card -->
+            <div class="card custom-card">
+            
+            <div class="card-header">
+                <img width="100%" src="http://www.pbh2.com/wordpress/wp-content/uploads/2013/05/cutest-cat-gifs-kitten-meow.gif">
+            </div>    
+                
+            <div class="card-block">
+                <h4 class="card-text">Cute cats are great</h4>
+                <p class="card-text"><small class="text-muted">4 days ago</small><small> by bretthart</small></p>
+            </div>
+            
+            <div class="card-block">
+                <a href="#" class="card-link">Comments</a>
+                
+                <div class="pull-right">               
+                <a class="card-link" href="#"><i class="fa fa-chevron-up"></i></a>
+                <a class="card-link" href="#">1</a>
+                <a class="card-link" href="#"><i class="fa fa-chevron-down"></i></a>
+                </div>
+            </div>
+            
+            <!-- reserved for showing comments
+            <div class="card-footer text-muted">
+            </div> -->
+            
+            <!-- end card -->
+            </div>
+            
+            
+            <!-- end posts -->
+            </div>
+            
+        </div>    
+        <!-- end content container -->
+        
+        
+        <!-- end main container -->    
+        </div>
+    </body>
+</html>
