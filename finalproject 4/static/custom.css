@@ -1,0 +1,21 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+    background-color: #1FC6D3;
+}
+
+.custom-content-container {
+    background-color: #EEEEEE;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.custom-card {
+    margin: 0 auto; /* Added */
+    margin-bottom: 10px;
+    width: 75rem;
+}
