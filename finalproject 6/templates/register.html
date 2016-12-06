@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+<div class="custom-content-container container-fluid">
+    <div class="col-md-6">
+    <h1 class="display-3">Registration is easy</h1>
+    <p class="lead">Sign up to make posts. Don't worry, you can be anonymous at the time of posting.</p>
+    <hr class="my-2">
+    </div>
+    <div class="col-md-6">
+     <form action="{{ url_for('register') }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="password" placeholder="Password" type="password"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="repeatPassword" placeholder="Password (again)" type="password"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Register</button>
+            </div>
+        </fieldset>
+    </form>
+    </div>
+</div>
+
+{% endblock %}
