@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create New Board
+{% endblock %}
+
+{% block main %}
+<div class="custom-content-container container-fluid">
+    <div class="col-md-6">
+    <h1 class="display-3">Create a new board</h1>
+    <p class="lead">It'll take two minutes <sup>&#169;</sup></p>
+    <hr class="my-2">
+    </div>
+    <div class="col-md-6">
+     <form action="{{ url_for('newboard') }}" id="newBoard" method="post">
+        <fieldset>
+            <div class="form-group">
+                <label for="boardTitle">Board title</label>
+                <input autocomplete="off" autofocus class="form-control" name="boardTitle" placeholder="John's new board" type="text"/>
+                <small id="boardTitleHelp" class="form-text text-muted">Name your board anything you like.</small>
+            </div>
+            <div class="form-group">
+                <label for="boardName">Unique board name</label>
+                <input class="form-control" name="boardName" placeholder="johnboard20" type="text"/>
+                <small id="boardNameHelp" class="form-text text-muted">Give your board a unique ID.</small>
+            </div>
+            <div class="form-group">
+                <label for="public">Visibility</label>
+                <div class="form-check">
+                <label class="form-check-label">
+                <input class="form-check-input public" type="radio" name="public" id="public" value="yes" checked>&nbsp;&nbsp;Public
+                </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                <input class="form-check-input private" type="radio" name="public" id="public" value="no">&nbsp;&nbsp;Private
+                </label>
+                </div>
+                <small id="visibilityHelp" class="form-text text-muted">You will not be able to change this later.</small>
+            </div>
+            <!-- Typeahead for adding usernames -->
+            <!-- <div class="collapse" id="addUserTypeahead"> -->
+            <div class="collapse form-group addUsers">
+                <label for="addUsers">Would you like to invite users to your board?</label>
+                <label class="sr-only" for="q">Username</label>
+                <input class="form-control" id="q" placeholder="johndoe21, juldoe42" type="text"/>
+                <small id="addUserHelp" class="form-text text-muted">You will not be able to add more users later.</small>
+            </div>
+            <div>
+                <h4 id="addedUsernames"></h3>
+                <input class="form-check-input" type="hidden" name="memberList" id="memberList">
+            </div>
+            <!-- end typeahead --> 
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Create</button>
+            </div>
+        </fieldset>
+    </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ boardName }}
+{% endblock %}
+
+{% block main %}
+        <!-- content container -->
+        <div id= 'counter' style="display: none;">1</div>
+        <div class="custom-content-container container-fluid">
+            <h3 class="text-center">Live feed of what people are saying on this board</h2><br>
+            
+            <!-- post banter form -->
+            <p class="text-center">
+                <a class="btn btn-primary" data-toggle="collapse" href="#postForm" aria-expanded="false" aria-controls="postForm">
+                Post Banter
+                </a>
+            </p><br>
+            <div class="collapse" id="postForm">
+                <div class="card custom-card">
+                    <div class="card-block">
+                        {% if session.user_id %}
+                        <form id="newPost" action="{{ url_for('newpost') }}" method="post">
+                            <!-- post content -->
+                            <div class="form-group row postContent">
+                            <label for="postContent" class="col-xs-2 col-form-label">Your Post</label>
+                            <div class="col-xs-10">
+                            <textarea class="form-control" rows="3" placeholder="The big brown fox jumped over the lazy dog..." id="postContent"></textarea>
+                            </div>
+                            </div>
+                            <!-- embed content -->
+                            <div class="form-group row embedContent">
+                            <label for="embedContent" class="col-xs-2 col-form-label">Embed Content</label>
+                            <div class="col-xs-10">
+                            <input class="form-control" type="url" placeholder="http://example.com/hello.png" id="embedContent">
+                            </div>
+                            </div>
+                            <!-- anonymous? -->
+                            <div class="form-group row anonymous">
+                            <label for="anonymous" class="col-xs-2 col-form-label">Anonymous?</label>
+                            <div class="col-xs-10">
+                                <div class="form-check">
+                                <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="anonymous" id="anonymous" value="no" checked>&nbsp;&nbsp;No
+                                </label>
+                                </div>
+                                <div class="form-check">
+                                <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="anonymous" id="anonymous" value="yes">&nbsp;&nbsp;Yes
+                                </label>
+                                </div>
+                            </div>
+                            </div>
+                            <!-- submit -->
+                            <div class="form-group row">
+                            <div class="col-xs-10 col-xs-offset-2">
+                            <button type="submit" class="btn btn-primary">Post</button>
+                            </div>
+                            </div>
+                        </form>
+                        {% else %}
+                        <h3 class="text-center">Please login to post banter.</h3>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- end post banter form -->
+            
+            
+            
+            <!-- posts -->
+            <div class="container-fluid">
+                    
+            <!-- toggle for recent/popular -->
+            <div class="custom-card">
+                <div>
+                <input id= 'toggle' type="checkbox"  {{ check }} data-toggle="toggle" data-style="ios" data-on="Popular" data-off="Recent" data-width="100" data-height="20">
+                </div>
+            </div>
+            <!-- end toggle for recent/popular -->    
+                    
+            <div id='refresh'>
+                {% for post in posts %}
+                    
+                    
+                    <!-- a card -->
+                    <div data-post-id="{{ post["post_id"] }}" class="card custom-card post">
+                    {% if post["embed_content"] != "" %}
+                        <!-- card embedContent -->
+                        <div class="card-header">
+                        {{ post["embed_content"] | safe}}
+                        </div>
+                    {% endif %}
+                    <!-- card postContent -->
+                    
+                    
+                    
+                    <div class="card-block"> 
+                        <h4 class="card-text">{{ post["post_content"] }}</h4> 
+                        <p class="card-text"><small class="text-muted">{{ post["timestamp"] }}</small><small> by {% if post["anonymous"] == "yes" %}Anonymous{% else %}{{ post["username"] }}{% endif %}</small></p>
+                        <a class="btn btn-primary btn-responsive show-comments" href="#comment-block-{{ post["post_id"] }}" data-toggle="collapse">Comments&nbsp;&nbsp;<span class="badge">{{ post["comment_count"] }}</span></a>
+                        <div class="pull-right"> 
+                        {% if session.user_id %}    
+                        <button class="btn btn-primary btn-responsive card-link vote upvote"><i class="fa fa-chevron-up"></i></button>
+                        <span class="card-link badge count">{{ post["vote_count"] }}</span>
+                        <button class="btn btn-primary btn-responsive card-link vote downvote"><i class="fa fa-chevron-down"></i></button>
+                        {% else %}
+                        <a class="card-link count">{{ post["vote_count"] }} votes</a>
+                        {% endif %}
+                        </div>
+                    </div>
+                    <!-- card comments -->
+                    <div id="comment-block-{{ post["post_id"] }}" class="collapse card-footer comment-block">
+                    <div id="form-comment-block-{{ post["post_id"] }}" class="card card-block">
+                        {% if session.user_id %}
+                        <form id="newComment-{{ post["post_id"] }}" class="newcomment" action="{{ url_for('newcomment') }}" method="post">
+                            <!-- post content -->
+                            <div class="form-group row commentContent">
+                            <label for="commentContent" class="col-xs-2 col-form-label">Your Comment<small class="text-muted">&nbsp;(posting as</small><small> {{ session.username }})</small></label>
+                            <div class="col-xs-10">
+                            <textarea class="form-control" rows="3" placeholder="The big brown fox jumped over the lazy dog..." id="commentContent"></textarea>
+                            </div>
+                            </div>
+                            <!-- submit -->
+                            <div class="form-group row">
+                            <div class="col-xs-10 col-xs-offset-2">
+                            <button type="submit" class="btn btn-primary">Comment</button>
+                            </div>
+                            </div>
+                        </form>
+                        {% else %}
+                        <h4>You must be logged in to post comments.</h4>
+                        {% endif %}
+                    </div>
+                    {% for comment in post["comment_list"] %}
+                    <div class="card card-block">
+                    <p class="card-text">{{ comment["comment_content"] }}</p>
+                    <p class="card-text"><small class="text-muted">{{ comment["timestamp"] }}</small><small> by {{ comment["username"] }}</small></p>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                    
+                    <!-- end card -->
+                    </div>
+                    
+                {% endfor %}
+                
+                
+                
+                <!-- end posts -->
+                </div>
+            </div>
+            
+            </div>    
+            <!-- end content container -->
+        
+{% endblock %}

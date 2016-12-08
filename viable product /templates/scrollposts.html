@@ -1,0 +1,76 @@
+<div id='refresh'>
+                <!-- posts -->
+                <div class="container-fluid">
+                    
+                {% for post in posts %}
+                    <!-- a card -->
+                    <div data-post-id="{{ post["post_id"] }}" class="card custom-card post">
+                    {% if post["embed_content"] != "" %}
+                        <!-- card embedContent -->
+                        <div class="card-header">
+                        {{ post["embed_content"] | safe}}
+                        </div>
+                    {% endif %}
+                    <!-- card postContent -->
+                    
+                    
+                    
+                    <div class="card-block"> 
+    
+                        <a class= "fa fa-chevron-down pull-right delete" data-toggle="collapse"
+                            href="#postForm" aria-expanded="false" aria-controls="postForm">
+                        </a>
+                    
+                        <h4 class="card-text">{{ post["post_content"] }}</h4> 
+                        <p class="card-text"><small class="text-muted">{{ post["timestamp"] }}</small><small> by {{ post["username"] }}</small></p>
+                        <a class="btn btn-primary btn-responsive show-comments" href="#comment-block-{{ post["post_id"] }}" data-toggle="collapse">Comments&nbsp;&nbsp;<span class="badge">{{ post["comment_count"] }}</span></a>
+                        <div class="pull-right"> 
+                        {% if session.user_id %}    
+                        <button class="btn btn-primary btn-responsive card-link vote upvote"><i class="fa fa-chevron-up"></i></button>
+                        <span class="card-link badge count">{{ post["vote_count"] }}</span>
+                        <button class="btn btn-primary btn-responsive card-link vote downvote"><i class="fa fa-chevron-down"></i></button>
+                        {% else %}
+                        <a class="card-link count">{{ post["vote_count"] }} votes</a>
+                        {% endif %}
+                        </div>
+                    </div>
+                    <!-- card comments -->
+                    <div id="comment-block-{{ post["post_id"] }}" class="collapse card-footer comment-block">
+                    <div class="card card-block">
+                        {% if session.user_id %}
+                        <form id="newComment-{{ post["post_id"] }}" class="newcomment" action="{{ url_for('newcomment') }}" method="post">
+                            <!-- post content -->
+                            <div class="form-group row commentContent">
+                            <label for="commentContent" class="col-xs-2 col-form-label">Your Comment<small class="text-muted">&nbsp;(posting as</small><small> {{ session.username }})</small></label>
+                            <div class="col-xs-10">
+                            <textarea class="form-control" rows="3" placeholder="The big brown fox jumped over the lazy dog..." id="commentContent"></textarea>
+                            </div>
+                            </div>
+                            <!-- submit -->
+                            <div class="form-group row">
+                            <div class="col-xs-10 col-xs-offset-2">
+                            <button type="submit" class="btn btn-primary">Comment!</button>
+                            </div>
+                            </div>
+                        </form>
+                        {% else %}
+                        <h4>You must be logged in to post comments.</h4>
+                        {% endif %}
+                    </div>
+                    {% for comment in post["comment_list"] %}
+                    <div class="card card-block">
+                    <p class="card-text">{{ comment["comment_content"] }}</p>
+                    <p class="card-text"><small class="text-muted">{{ comment["timestamp"] }}</small><small> by randomuser</small></p>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                    
+                    <!-- end card -->
+                    </div>
+                {% endfor %}
+                
+                
+                
+                <!-- end posts -->
+                </div>
