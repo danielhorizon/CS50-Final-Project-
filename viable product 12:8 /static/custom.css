@@ -1,0 +1,137 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.custom-content-container {
+    background-color: #EEEEEE;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.custom-card {
+    margin: 0 auto; /* Added */
+    margin-bottom: 20px;
+    width: 75%;
+}  
+
+.custom-board-card {
+    margin-bottom: 25px;
+}    
+    
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .custom-card {
+        width: 100%;
+    }    
+}
+
+.embedContentImage {
+    width: 100%;
+    height: 100%;
+    background-image: url(/static/loader.gif);
+}
+
+.embedContentVideo {
+    position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+
+.embedContentVideo iframe {
+    position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* responsive buttons */
+@media (max-width: 768px) {
+  .btn-responsive {
+    padding:2px 4px;
+    font-size:80%;
+    line-height: 1;
+    border-radius:3px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+  .btn-responsive {
+    padding:4px 9px;
+    font-size:90%;
+    line-height: 1.2;
+  }
+}
+
+/* stylize text box */
+#q
+{
+    /* override typeahead.js's transparent background */
+    background-color: #ffffff !important;
+
+    /* text box's width */
+    width: 300px;
+}
+
+/* stylize info window */
+#info
+{
+    /* no margin around this element */
+    margin: 0;
+
+    /* allow scrollbars as needed */
+    overflow: auto;
+}
+#info ul
+{
+    margin-bottom: 0;
+}
+
+/* stylize typeahead.js a la http://twitter.github.io/typeahead.js/css/examples.css */
+.tt-menu
+{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 1px;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 300px;
+}
+.tt-suggestion.tt-cursor {
+    background-color: #0097cf;
+    color: #fff;
+    cursor: pointer;
+}
+.tt-suggestion {
+    margin: 0;
+    padding: 6px 12px;
+}
+
+
+.custom-user-tag {
+    margin: 3px;
+    padding: 3px;
+}
+
+/* stylize the toggle button for Recent/Popular */
+.toggle.ios, .toggle-on.ios, .toggle-off.ios {
+    border-radius: 20px; 
+    
+}
+.toggle.ios, .toggle-handle {
+    border-radius: 20px;
+}
+
+
+  
+  
+
+
+

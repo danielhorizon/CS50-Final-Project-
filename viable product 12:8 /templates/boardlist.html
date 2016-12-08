@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your Boards
+{% endblock %}
+
+{% block main %}
+        <!-- content container -->
+        <div class="custom-content-container container-fluid">
+            <h3 class="text-center">Your private and created boards</h2>
+            <h4 class="text-center text-muted">Remember that other public boards can be accessed at /board/boardname</h2><br>
+            
+            <!-- container for board cards -->
+            <div class = "container">   
+                
+            <!-- a row of board cards -->    
+            <div class="row">
+                {% for board in rows %}
+                <div class="col-md-4 board">
+                    <div class="card custom-board-card">
+                        <div class="card-block">
+                            <h4 class="card-title">{{ board["board_title"] }}</h4>
+                            <p class="card-text text-muted">{% if board["public"] == "yes" %}Public{% else %}Private{% endif %}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Created by {{ board["username"] }}</li>
+                            <li class="list-group-item">{{ board["post_count"] }} posts</li>
+                            <li class="list-group-item">Created {{ board["timestamp"] }}</li>
+                        </ul>
+                        <div class="card-block">
+                            <a href="/board/{{ board["board_name"] }}" class="btn btn-primary btn-sm btn-responsive">Visit</a>&nbsp;&nbsp;
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index is divisibleby 3 %}
+            </div>
+            <div class="row">
+            {% endif %}
+            {% endfor %}
+            </div>
+            <!-- end row of board cards -->      
+                
+            <!-- end container for board cards -->   
+            </div>
+        <!-- end content container -->    
+        </div>    
+        
+{% endblock %}
