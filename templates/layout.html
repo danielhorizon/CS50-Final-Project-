@@ -3,6 +3,10 @@
 <html>
     <head>
         
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta -->
+    <meta charset="utf-8"/>
+    <meta content="initial-scale=1, width=device-width" name="viewport"/>
+        
     <!-- Latest compiled and minified Bootstrap4 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
     
@@ -15,6 +19,9 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script> 
     
+    <!-- tooltips with Tether -->
+    <script src="{{ url_for('static', filename='tether.min.js') }}"></script>
+    
     <!-- Latest compiled and minified Bootstrap4 JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" integrity="sha384-BLiI7JTZm+JWlgKa0M0kGRpJbF2J8q+qreVrKBC47e3K6BW78kGLrCkeRX6I9RoK" crossorigin="anonymous"></script>
 
@@ -25,12 +32,13 @@
     {{ JSGlue.include() }}
     
     <!-- custom scripts -->
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>   
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
     
         <title>Banter | {% block title %}{% endblock %}</title>
     
     </head>
     <body>
+        <script src="//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.5" async></script> 
         
         <!-- wrapping container -->
         <div class="container">
@@ -61,23 +69,36 @@
                 </div>
                 <button type="submit" class="btn btn-default">Go</button>
             </form>
-            <li><a href="#">Post Banter</a></li>
+            {% if session.user_id %}
             <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account</a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="#">Posts</a></li>
+                  <li><a href="#">Boards</a></li>
+                  <li><a href="#">Settings</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
                   <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                  <li><a href="{{ url_for('logout') }}">Logout</a></li>
                 </ul>
             </li>
+            {% else %}
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+            
         </ul>
         </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
         </nav>
+        
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-info" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
             
         <main>
         {% block main %}{% endblock %}
